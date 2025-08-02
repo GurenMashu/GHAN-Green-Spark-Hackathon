@@ -1,7 +1,7 @@
 # 🚀 Green Spark Submission
 
 ## Project Title
-KHET_AI: Eco-Aware Farming Assistant
+KHET_AI : Eco-Aware Farming Assistant
 
 ## Problem Statement Addressed
 How might we help Indian farmers identify crop diseases early and make eco-friendly, informed decisions about treatment and crop selection, using accessible and easy-to-use technology?
@@ -29,8 +29,10 @@ https://github.com/ARKLOGAMER/green-spark-submissions
 - Afzina Sadiq – Frontend and documentation
 
 ## Screenshots
-
-![Screenshot](./assets/screenshot.png)
+**1.**
+![Screenshot](./assets/Screenshot1.png)
+**2.**
+![Screenshot](./assets/Screenshot2.png)
 
 ### Challenges Faced
 - Designing an accurate image classifier for multiple crop diseases
