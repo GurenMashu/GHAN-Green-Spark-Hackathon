@@ -1,85 +1,626 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-gray-900 text-white">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KHET_AI</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KHET_AI - Diagnose Precisely, Cultivate Wisely</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #2d5016 0%, #3e6b1a 30%, #4a7c1e 70%, #5a8c2a 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M30 45c0-8.284-6.716-15-15-15s-15 6.716-15 15 6.716 15 15 15 15-6.716 15-15zm0-30c0-8.284-6.716-15-15-15S0 6.716 0 15s6.716 15 15 15 15-6.716 15-15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .plant-doodle {
+            position: fixed;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 2rem;
+            z-index: -1;
+            pointer-events: none;
+            animation: sway 6s ease-in-out infinite;
+            user-select: none;
+        }
+
+        @keyframes sway {
+            0%, 100% { 
+                transform: rotate(-3deg) translateY(0px) scale(1); 
+                opacity: 0.1;
+            }
+            25% { 
+                transform: rotate(1deg) translateY(-5px) scale(1.05); 
+                opacity: 0.15;
+            }
+            50% { 
+                transform: rotate(3deg) translateY(-10px) scale(1.1); 
+                opacity: 0.2;
+            }
+            75% { 
+                transform: rotate(-1deg) translateY(-5px) scale(1.05); 
+                opacity: 0.15;
+            }
+        }
+
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(20px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 3rem 0;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: white;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-group select option {
+            background: #4a7c1e;
+            color: white;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .footer-text {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<body class="font-sans">
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">KHET_AI</a>
+            <ul class="nav-links">
+                <li><a href="#disease-detection">Disease Detection</a></li>
+                <li><a href="#crop-recommendation">Crop Recommendation</a></li>
+                <li><a href="#soil-analysis">Soil Analysis</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- Navbar -->
-  <header class="bg-gray-800 shadow">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-green-400">🌱 KHET_AI</h1>
-      <nav class="space-x-6">
-        <a href="#" class="hover:text-green-300">Home</a>
-        <a href="#" class="hover:text-green-300">Detect Disease</a>
-        <a href="#" class="hover:text-green-300">Crop Advisor</a>
-      </nav>
-    </div>
-  </header>
+    <main class="container">
+        <section class="hero">
+            <h1>KHET_AI</h1>
+            <div class="hero-subtitle">Diagnose Precisely • Cultivate Wisely • Understand Deeply</div>
+            <p class="hero-description">
+                Empowering farmers worldwide with AI-driven insights for better crops, healthier soil, and sustainable agriculture.
+            </p>
+        </section>
 
-  <!-- Hero Section -->
-  <section class="py-20 text-center bg-gray-900">
-    <h2 class="text-4xl font-extrabold text-green-300">Empowering Farmers with AI</h2>
-    <p class="mt-4 text-lg text-gray-300">Instant disease detection and eco-friendly crop recommendations to boost your yield sustainably.</p>
-    <button class="mt-6 px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition">Try Now</button>
-  </section>
+        <section class="services">
+            <!-- Disease Detection Card -->
+            <div class="service-card" id="disease-detection">
+                <h3>🔍 Predict your crop Disease</h3>
+                <p>Upload images of your crops to get instant AI-powered disease diagnosis and treatment recommendations.</p>
+                <div class="upload-area" onclick="document.getElementById('imageUpload').click()">
+                    <div class="upload-icon">⬆</div>
+                    <div>Upload Image</div>
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="handleImageUpload(this)">
+                </div>
+                <button class="btn" onclick="analyzeCropDisease()">Analyze Disease</button>
+            </div>
 
-  <!-- Upload Section -->
-  <section class="max-w-4xl mx-auto p-8 bg-gray-800 rounded-xl shadow mt-10">
-    <h3 class="text-2xl font-bold mb-4 text-green-400">📷 Upload Crop Image</h3>
-    <form class="space-y-4">
-      <input type="file" class="w-full bg-gray-700 text-white p-3 rounded" />
-      <button class="w-full bg-green-500 hover:bg-green-600 p-3 rounded font-semibold">Detect Disease</button>
-    </form>
-  </section>
+            <!-- Crop Recommendation Card -->
+            <div class="service-card" id="crop-recommendation">
+                <h3>🌱 Crop Recommendation Assistant</h3>
+                <p>Get personalized crop suggestions based on your climate, soil type, location, rainfall, and temperature for optimal yield.</p>
+                
+                <div class="form-group">
+                    <label>Climate</label>
+                    <select id="climate">
+                        <option value="">Select Climate</option>
+                        <option value="tropical">Tropical</option>
+                        <option value="subtropical">Subtropical</option>
+                        <option value="temperate">Temperate</option>
+                        <option value="arid">Arid</option>
+                        <option value="continental">Continental</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Type of Soil</label>
+                    <select id="soilType">
+                        <option value="">Select Soil Type</option>
+                        <option value="clay">Clay</option>
+                        <option value="sandy">Sandy</option>
+                        <option value="loamy">Loamy</option>
+                        <option value="silt">Silt</option>
+                        <option value="peaty">Peaty</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" placeholder="Enter your location">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Average Rainfall (mm/year)</label>
+                        <input type="number" id="rainfall" placeholder="e.g., 1200" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Average Temperature (°C)</label>
+                        <input type="number" id="temperature" placeholder="e.g., 25" min="-50" max="60">
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="getCropRecommendation()">Get Recommendations</button>
+            </div>
 
-  <!-- Crop Recommendation Input Section -->
-<section class="max-w-4xl mx-auto p-8 bg-gray-800 rounded-xl shadow mt-10">
-  <h3 class="text-2xl font-bold mb-4 text-green-400">🌱 Crop Recommendation Assistant</h3>
-  <form class="space-y-4">
-    <div>
-      <label class="block mb-1 text-gray-300">Soil Type</label>
-      <select class="w-full p-3 bg-gray-700 text-white rounded">
-        <option>Sandy</option>
-        <option>Clay</option>
-        <option>Loamy</option>
-        <option>Black</option>
-        <option>Red</option>
-      </select>
-    </div>
-    <div>
-      <label class="block mb-1 text-gray-300">Average Rainfall (mm)</label>
-      <input type="number" class="w-full bg-gray-700 text-white p-3 rounded" placeholder="e.g., 800" />
-    </div>
-    <div>
-      <label class="block mb-1 text-gray-300">Average Temperature (°C)</label>
-      <input type="number" class="w-full bg-gray-700 text-white p-3 rounded" placeholder="e.g., 27" />
-    </div>
-    <div>
-      <label class="block mb-1 text-gray-300">Region / State</label>
-      <input type="text" class="w-full bg-gray-700 text-white p-3 rounded" placeholder="e.g., Maharashtra" />
-    </div>
-    <button class="w-full bg-green-500 hover:bg-green-600 p-3 rounded font-semibold">Get Crop Suggestions</button>
-  </form>
-</section>
+            <!-- Soil Analyzer Card -->
+            <div class="service-card" id="soil-analysis">
+                <h3>🧪 Soil Analyser</h3>
+                <p>Enter texture, type of the soil, crop want to be cultivated to give suggestions to estimate an average pH and improving soil quality.</p>
+                <div class="form-group">
+                    <label>Soil Texture</label>
+                    <input type="text" id="soilTexture" placeholder="e.g., Fine, Coarse, Medium">
+                </div>
+                <div class="form-group">
+                    <label>Soil Type</label>
+                    <input type="text" id="soilAnalysisType" placeholder="e.g., Alluvial, Black cotton, Red">
+                </div>
+                <div class="form-group">
+                    <label>Crop to be Cultivated</label>
+                    <input type="text" id="targetCrop" placeholder="e.g., Rice, Wheat, Cotton">
+                </div>
+                <button class="btn" onclick="analyzeSoil()">Analyze Soil</button>
+            </div>
+        </section>
+    </main>
 
-  <!-- Recommendations Section -->
-  <section class="max-w-4xl mx-auto p-8 mt-10 bg-gray-800 rounded-xl shadow">
-    <h3 class="text-2xl font-bold mb-4 text-green-400">🌾 Recommendations</h3>
-    <ul class="space-y-3 list-disc list-inside text-gray-300">
-      <li>Apply neem-based organic pesticide twice a week.</li>
-      <li>Avoid watering during peak sun hours.</li>
-      <li>Consider rotating crops with legumes to restore soil health.</li>
-    </ul>
-  </section>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">KHET_AI</div>
+                <div class="footer-text">© 2025 Khet_AI. All rights reserved. Built with 💚 for farmers worldwide.</div>
+            </div>
+        </div>
+    </footer>
 
-  <!-- Footer -->
-  <footer class="text-center py-6 mt-16 bg-gray-900 text-gray-500">
-    &copy; 2025 KHET_AI | Built for Green Spark Hackathon 🌍
-  </footer>
+    <script>
+        function handleImageUpload(input) {
+            if (input.files && input.files[0]) {
+                const fileName = input.files[0].name;
+                const uploadArea = input.parentElement;
+                uploadArea.innerHTML = `
+                    <div class="upload-icon">✓</div>
+                    <div>Image uploaded: ${fileName}</div>
+                `;
+                uploadArea.style.borderColor = '#4facfe';
+                uploadArea.style.background = 'rgba(79, 172, 254, 0.2)';
+            }
+        }
 
+        function analyzeCropDisease() {
+            const imageInput = document.getElementById('imageUpload');
+            if (!imageInput.files || !imageInput.files[0]) {
+                alert('Please upload an image first!');
+                return;
+            }
+            
+            // Simulate AI analysis
+            alert('🔍 Analyzing crop disease... This would connect to your AI model for real diagnosis!');
+        }
+
+        function getCropRecommendation() {
+            const climate = document.getElementById('climate').value;
+            const soilType = document.getElementById('soilType').value;
+            const location = document.getElementById('location').value;
+            const rainfall = document.getElementById('rainfall').value;
+            const temperature = document.getElementById('temperature').value;
+
+            if (!climate || !soilType || !location || !rainfall || !temperature) {
+                alert('Please fill in all fields for accurate recommendations!');
+                return;
+            }
+
+            // Simulate recommendation with enhanced data
+            alert(`🌱 Crop Recommendation Analysis Complete!
+            
+Location: ${location}
+Climate: ${climate}
+Soil Type: ${soilType}  
+Rainfall: ${rainfall}mm/year
+Temperature: ${temperature}°C
+
+Based on these conditions, we recommend:
+• Primary crops: Rice, wheat, or vegetables
+• Consider seasonal variations
+• Optimal planting time suggestions available
+
+This would connect to your AI recommendation system for detailed analysis!`);
+        }
+
+        function analyzeSoil() {
+            const texture = document.getElementById('soilTexture').value;
+            const type = document.getElementById('soilAnalysisType').value;
+            const crop = document.getElementById('targetCrop').value;
+
+            if (!texture || !type || !crop) {
+                alert('Please fill in all soil analysis fields!');
+                return;
+            }
+
+            // Simulate soil analysis
+            alert(`🧪 Soil Analysis Complete!
+
+Texture: ${texture}
+Type: ${type}
+Target Crop: ${crop}
+
+Results:
+• Estimated pH: 6.5-7.0
+• Nutrient Status: Good
+• Recommendations: Consider adding organic matter for better yield
+• Irrigation: Moderate water requirements
+
+This would connect to your soil analysis AI for detailed recommendations!`);
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced particle system
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Random starting position
+            const startX = Math.random() * window.innerWidth;
+            const startY = window.innerHeight + 10;
+            
+            // Random properties
+            const size = Math.random() * 3 + 2;
+            const duration = Math.random() * 3000 + 4000;
+            const drift = (Math.random() - 0.5) * 100;
+            
+            particle.style.left = startX + 'px';
+            particle.style.top = startY + 'px';
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.animation = `float ${duration}ms linear`;
+            
+            document.body.appendChild(particle);
+
+            // Remove particle after animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, duration);
+        }
+
+        // Plant doodles system
+        const plantEmojis = ['🌱', '🌿', '🍃', '🌾', '🌻', '🌳', '🌲', '🪴', '🌵', '🍀', '🌸', '🌺', '🌼', '🌹', '🌷'];
+        
+        function createPlantDoodle() {
+            const doodle = document.createElement('div');
+            doodle.className = 'plant-doodle';
+            doodle.textContent = plantEmojis[Math.floor(Math.random() * plantEmojis.length)];
+            
+            // Random positioning
+            doodle.style.left = Math.random() * (window.innerWidth - 50) + 'px';
+            doodle.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+            
+            // Random animation properties
+            doodle.style.animationDelay = Math.random() * 6 + 's';
+            doodle.style.animationDuration = (4 + Math.random() * 4) + 's';
+            doodle.style.fontSize = (1.5 + Math.random() * 1) + 'rem';
+            
+            document.body.appendChild(doodle);
+        }
+
+        // Initialize animations when page loads
+        window.addEventListener('load', function() {
+            // Create initial plant doodles
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => createPlantDoodle(), i * 200);
+            }
+            
+            // Start particle system
+            setTimeout(() => {
+                setInterval(createParticle, 800);
+            }, 1000);
+            
+            // Refresh plant doodles occasionally
+            setInterval(() => {
+                if (Math.random() < 0.1) { // 10% chance
+                    createPlantDoodle();
+                }
+            }, 3000);
+        });
+
+        // Cleanup old doodles to prevent memory leaks
+        setInterval(() => {
+            const doodles = document.querySelectorAll('.plant-doodle');
+            if (doodles.length > 25) {
+                doodles[0].remove();
+            }
+        }, 10000);
+    </script>
 </body>
 </html>
