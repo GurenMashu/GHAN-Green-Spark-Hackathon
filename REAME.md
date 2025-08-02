@@ -1,17 +1,17 @@
 # 🚀 Green Spark Submission
 
 ## Project Title
-Agri-Smart: Eco-Aware Farming Assistant
+KHET_AI: Eco-Aware Farming Assistant
 
 ## Problem Statement Addressed
 "How might we build and deploy technology-driven solutions that actively promote cleaner, greener communities and environmental sustainability?"
 
 ## Project Overview
-Agri-Smart is an innovative web application aimed at supporting small-scale farmers by tackling the dual challenge of crop diseases and unsustainable farming practices. Using deep learning and machine learning, it provides real-time crop disease identification from a simple photo taken by the user. Once diagnosed, the app offers sustainable, eco-friendly treatment recommendations that reduce dependency on harmful pesticides. 
+Agri-Smart is an innovative web application aimed at supporting small-scale farmers by tackling the dual challenge of crop diseases and unsustainable farming practices. Using deep learning and machine learning, it provides real-time crop disease identification from a simple photo taken by the user. Once diagnosed, the website offers sustainable, eco-friendly treatment recommendations that reduce dependency on harmful pesticides. 
 
 Additionally, the platform includes a personalized crop and soil recommendation system that guides farmers in selecting resilient and suitable crops for their specific environment. This not only enhances yield but also promotes optimal land use and eco-conscious farming decisions.
 
-By democratizing access to smart agricultural tools, Agri-Smart empowers farmers to adopt sustainable practices, contributing to greener communities and a healthier planet.
+By democratizing access to smart agricultural tools, Khet_AI empowers farmers to adopt sustainable practices, contributing to greener communities and a healthier planet.
 
 ## Key Features
 - 📷 Instant crop disease detection using CNN
@@ -20,21 +20,17 @@ By democratizing access to smart agricultural tools, Agri-Smart empowers farmers
 - 🧑‍🌾 Simple, farmer-friendly interface for easy accessibility
 
 ## GitHub Repository Link
-<!-- Paste your public repo link here -->
-https://github.com/your-team-name/agri-smart
+https://github.com/ARKLOGAMER/green-spark-submissions
 
 ## Team Members & Roles
-- Name 1 – Frontend Developer & UI Designer
-- Name 2 – Machine Learning Engineer
-- Name 3 – Backend Developer
-- Name 4 – Research & Documentation
+- Glenn Mathews - Machine Learning model preparation and backend
+- Nandana Murali – Machine Learning model building
+- Harishankar S M – Frontend and Backend development
+- Afzina Sadiq – Frontend and documentation
 
-## Screenshot
-Include a screenshot of your project UI or working demo:
+## Screenshots
 
 ![Screenshot](./assets/screenshot.png)
-
-## Additional Notes (Optional)
 
 ### Challenges Faced
 - Designing an accurate image classifier for multiple crop diseases
@@ -45,7 +41,7 @@ Include a screenshot of your project UI or working demo:
 - Python, PyTorch (for deep learning)
 - Scikit-learn (for ML recommendations)
 - React & TailwindCSS (for frontend)
-- Flask (for backend integration)
+- Flask or FastAPI (for backend integration)
 
 ### Future Plans
 - Include multi-language support
