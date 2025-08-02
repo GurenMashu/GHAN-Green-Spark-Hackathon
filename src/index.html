@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray-900 text-white">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KHET_AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans">
+
+  <!-- Navbar -->
+  <header class="bg-gray-800 shadow">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-green-400">🌱 KHET_AI</h1>
+      <nav class="space-x-6">
+        <a href="#" class="hover:text-green-300">Home</a>
+        <a href="#" class="hover:text-green-300">Detect Disease</a>
+        <a href="#" class="hover:text-green-300">Crop Advisor</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="py-20 text-center bg-gray-900">
+    <h2 class="text-4xl font-extrabold text-green-300">Empowering Farmers with AI</h2>
+    <p class="mt-4 text-lg text-gray-300">Instant disease detection and eco-friendly crop recommendations to boost your yield sustainably.</p>
+    <button class="mt-6 px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition">Try Now</button>
+  </section>
+
+  <!-- Upload Section -->
+  <section class="max-w-4xl mx-auto p-8 bg-gray-800 rounded-xl shadow mt-10">
+    <h3 class="text-2xl font-bold mb-4 text-green-400">📷 Upload Crop Image</h3>
+    <form class="space-y-4">
+      <input type="file" class="w-full bg-gray-700 text-white p-3 rounded" />
+      <button class="w-full bg-green-500 hover:bg-green-600 p-3 rounded font-semibold">Detect Disease</button>
+    </form>
+  </section>
+
+  <!-- Crop Recommendation Input Section -->
+<section class="max-w-4xl mx-auto p-8 bg-gray-800 rounded-xl shadow mt-10">
+  <h3 class="text-2xl font-bold mb-4 text-green-400">🌱 Crop Recommendation Assistant</h3>
+  <form class="space-y-4">
+    <div>
+      <label class="block mb-1 text-gray-300">Soil Type</label>
+      <select class="w-full p-3 bg-gray-700 text-white rounded">
+        <option>Sandy</option>
+        <option>Clay</option>
+        <option>Loamy</option>
+        <option>Black</option>
+        <option>Red</option>
+      </select>
+    </div>
+    <div>
+      <label class="block mb-1 text-gray-300">Average Rainfall (mm)</label>
+      <input type="number" class="w-full bg-gray-700 text-white p-3 rounded" placeholder="e.g., 800" />
+    </div>
+    <div>
+      <label class="block mb-1 text-gray-300">Average Temperature (°C)</label>
+      <input type="number" class="w-full bg-gray-700 text-white p-3 rounded" placeholder="e.g., 27" />
+    </div>
+    <div>
+      <label class="block mb-1 text-gray-300">Region / State</label>
+      <input type="text" class="w-full bg-gray-700 text-white p-3 rounded" placeholder="e.g., Maharashtra" />
+    </div>
+    <button class="w-full bg-green-500 hover:bg-green-600 p-3 rounded font-semibold">Get Crop Suggestions</button>
+  </form>
+</section>
+
+  <!-- Recommendations Section -->
+  <section class="max-w-4xl mx-auto p-8 mt-10 bg-gray-800 rounded-xl shadow">
+    <h3 class="text-2xl font-bold mb-4 text-green-400">🌾 Recommendations</h3>
+    <ul class="space-y-3 list-disc list-inside text-gray-300">
+      <li>Apply neem-based organic pesticide twice a week.</li>
+      <li>Avoid watering during peak sun hours.</li>
+      <li>Consider rotating crops with legumes to restore soil health.</li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 mt-16 bg-gray-900 text-gray-500">
+    &copy; 2025 KHET_AI | Built for Green Spark Hackathon 🌍
+  </footer>
+
+</body>
+</html>
