@@ -1,13 +1,13 @@
 # 🚀 Green Spark Submission
 
 ## Project Title
-Agri-Smart: Eco-Aware Farming Assistant
+KHET_AI: Eco-Aware Farming Assistant
 
 ## Problem Statement Addressed
-"How might we build and deploy technology-driven solutions that actively promote cleaner, greener communities and environmental sustainability?"
+How might we help Indian farmers identify crop diseases early and make eco-friendly, informed decisions about treatment and crop selection, using accessible and easy-to-use technology?
 
 ## Project Overview
-Agri-Smart is an innovative web application aimed at supporting small-scale farmers by tackling the dual challenge of crop diseases and unsustainable farming practices. Using deep learning and machine learning, it provides real-time crop disease identification from a simple photo taken by the user. Once diagnosed, the app offers sustainable, eco-friendly treatment recommendations that reduce dependency on harmful pesticides. 
+Our solution - Khet_AI -  is an innovative web application aimed at supporting small-scale farmers by tackling the dual challenge of crop diseases and unsustainable farming practices. Using deep learning and machine learning, it provides real-time crop disease identification from a simple photo taken by the user. Once diagnosed, the website offers sustainable, eco-friendly treatment recommendations that reduce dependency on harmful pesticides. 
 
 Additionally, the platform includes a personalized crop and soil recommendation system that guides farmers in selecting resilient and suitable crops for their specific environment. This not only enhances yield but also promotes optimal land use and eco-conscious farming decisions.
 
@@ -40,7 +40,7 @@ https://github.com/ARKLOGAMER/green-spark-submissions
 ### Tech Stack Used
 - Python, PyTorch (for deep learning)
 - Scikit-learn (for ML recommendations)
-- React & TailwindCSS (for frontend)
+- React &/or TailwindCSS (for frontend)
 - Flask or FastAPI (for backend integration)
 
 ### Future Plans
@@ -48,4 +48,3 @@ https://github.com/ARKLOGAMER/green-spark-submissions
 - Expand to pest identification
 - Add weather-based dynamic recommendations
 
----
